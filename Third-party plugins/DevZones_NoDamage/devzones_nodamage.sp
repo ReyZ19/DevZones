@@ -29,11 +29,11 @@ public OnClientPutInServer(client)
 
 public Action:OnTakeDamage(victim, &attacker, &inflictor, &Float:damage, &damagetype)
 {
-	if(!IsValidClient(victim) || !IsValidClient(attacker)) return Plugin_Continue;
+	if(!IsValidClient(victim)) return Plugin_Continue;
 	
 	if(!Zone_IsClientInZone(victim, "nodamage", false) && !Zone_IsClientInZone(attacker, "nodamage", false)) return Plugin_Continue;
 	
-	PrintHintText(attacker, "You cant hurt players in that zone!");
+	if(IsValidClient(attacker))PrintHintText(attacker, "You cant hurt players in that zone!");
 	return Plugin_Handled;
 }
 
